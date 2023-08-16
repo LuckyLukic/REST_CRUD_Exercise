@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ public class StudentRestController {
 	private List<Student> theStudents;
 	
 	//@PostConstruct to load the student data only once
+	
 	@PostConstruct
 	public void loadData() {
 		
@@ -30,12 +32,20 @@ public class StudentRestController {
 		
 	}
 
+	//define endpoint to see the whole Student list
 	
 	@GetMapping("/students")
 	public List<Student> getStudents() {
 		
-		
-		
 		return theStudents;
 	}
+	
+	//define endpoint to return student at index
+	
+	@GetMapping("/students/{studentId}")
+	public Student getStudent(@PathVariable int studentId) {
+		
+		return theStudents.get(studentId);
+	}
+	
 }
